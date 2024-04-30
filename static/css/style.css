@@ -1,0 +1,69 @@
+h1 {
+    color: darkblue;
+    font-size: 50px;
+}
+
+h2 {
+    color: rgb(79, 139, 0);
+    font-size: 40px;
+}
+
+p {
+    color: rgb(139, 0, 97);
+    font-size: 20px;
+}
+
+body {
+    background: #f4f4f4;
+}
+
+#demo{
+    font-size: 8px;
+}
+
+/* Style des boutons */
+input[type="submit"] {
+    background-color: #008080; /* Couleur turquoise pour le bouton */
+    color: #ffffff; /* Texte blanc */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+input[type="submit"]:hover {
+    background-color: #006666; /* Couleur turquoise plus foncée au survol */
+}
+
+/* Définir une couleur "vert eau scintillante" pour le fond */
+body {
+    background-color: #b0e0e6; /* Utilisation d'une teinte de cyan pastel */
+    font-family: Arial, sans-serif;
+}
+
+/* Style des titres des colonnes dans les tables */
+th {
+    text-align: center; /* Centrer le texte dans les entêtes de colonnes */
+    background-color: #008080; /* Couleur de fond turquoise pour les entêtes de colonnes */
+    color: #ffffff; /* Texte blanc */
+    padding: 12px; /* Espacement interne autour du texte */
+    border: 1px solid #dddddd; /* Bordure de 1 pixel solide gris */
+}
+
+/* Style des lignes impaires du tableau */
+tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Couleur de fond gris clair pour les lignes impaires */
+}
+
+/* Autres styles pour les cellules des tables */
+td {
+    text-align: center; /* Aligner le texte à gauche dans les cellules */
+    padding: 12px; /* Espacement interne autour du texte */
+    border: 1px solid #dddddd; /* Bordure de 1 pixel solide gris */
+}
+
+/* Style des cellules de données spécifiques */
+td#id,
+td#email,
+td#phone {
+    text-align: center; /* Centrer le texte dans les cellules spécifiques */
+}

@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block contenent %}
+
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    
+{% endfor %}
+
+
+<h2>Dashboard!</h2>
+<div class="card">
+    <div class="card-header">
+        {{ current_user.name }}    
+    </div>
+    <div class="card-body">
+      <p class="card-text">
+            <div class="container">
+                <div class="row">
+                    <div class="col-8">
+                        <strong>Username: </strong>{{ current_user.username }}<br/>
+                        <strong>User Id: </strong>{{ current_user.id }}<br/>
+                        <strong>Email: </strong>{{ current_user.email }}<br/>
+                        <strong>Phone: </strong>{{ current_user.phone }}<br/>
+                        <strong>Ville: </strong>{{ current_user.ville }}<br/>
+                        <strong>Statut: </strong>{{ current_user.statut }}<br/>
+                        <strong>Favorite color: </strong>{{ current_user.favourite_color }}<br/>
+                        <strong>About Author: </strong>{{ current_user.about_author }}<br/>
+                        <strong>Profile Picture: </strong>{{ current_user.profile_pic }}<br/>
+                        <strong>Date Joined: </strong>{{ current_user.date_added }}<br/> 
+      </p>
+                        <a href="{{ url_for('logout') }}" class="btn btn-secondary btn-sm">Logout</a>
+                        <a href="{{url_for('update',id=current_user.id)}}" class="btn btn-secondary btn-sm">Update Profile</a>
+                        <a href="{{ url_for('delete', id=current_user.id) }}" class="btn btn-danger btn-sm">Delete</a>
+                        <br/><br/>
+                    </div>
+                        <div class="col-4">
+                           {% if current_user.profile_pic %}
+                                <img src="{{ url_for('static', filename='images/' + current_user.profile_pic) }}" width="200" align="right"> 
+                           {% else %}
+                                <img src="{{ url_for('static', filename='images/image_profil.png') }}" width="200" align="right"> 
+                           {% endif %}
+                        </div>
+                    </div>
+                </div>    
+            </div>
+    </div>
+<br/>
+
+<div class="card">
+    <div class="card-header">
+        Update profile    
+    </div>
+    <div class="card-body">
+        <form action="/dashboard" method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            {{ form.name.label(class="form-label") }}
+            {{ form.name(class="form-control", value=record_to_update.name) }}
+            {{ form.username.label(class="form-label") }}
+            {{ form.username(class="form-control", value=record_to_update.username) }}
+            {{ form.email.label(class="form-label") }}
+            {{ form.email(class="form-control", value=record_to_update.email) }}
+            {{ form.phone.label(class="form-label") }}
+            {{ form.phone(class="form-control", value=record_to_update.phone) }}
+            {{ form.favourite_color.label(class="form-label") }}
+            {{ form.favourite_color(class="form-control", value=record_to_update.favourite_color) }}
+            
+            <div class="form-label">Ville ?</div>
+            <select class="form-select" name="ville">
+                {% set villes = [
+                    ('constantine', 'Constantine'),
+                    ('annaba', 'Annaba'),
+                    ('alger', 'Alger'),
+                    ('oran', 'Oran')
+                ] %}
+                {% for value, label in villes %}
+                    <option value="{{ value }}" {% if record_to_update.ville == value %} selected {% endif %}>
+                        {{ label }}
+                    </option>
+                {% endfor %}
+            </select>
+            
+            <div class="form-label">Statut ?</div>
+            {% for value, label in form.statut.choices %}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="statut" id="statut_{{ value }}" value="{{ value }}" {% if record_to_update.statut == value %} checked {% endif %}
+                    <label class="form-check-label" for="statut_{{ value }}"> {{ label }}</label>
+                </div>    
+            {% endfor %}
+            <br/>
+            
+            {{ form.about_author.label(class="form-label") }}
+            <textarea name="about_author" class="form-control"> {{ record_to_update.about_author }}  </textarea>
+            <br/>
+
+            {{ form.profile_pic.label(class="form-label") }}
+            {{ form.profile_pic(class="form-control", value=record_to_update.profile_pic) }}
+
+            {{ form.submit(class="btn btn-primary btn-sm") }}
+            
+        </form>
+</div>
+
+{% endblock %}
